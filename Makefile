@@ -82,7 +82,7 @@ csharp: $(OBJ) $(INCLUDES)
 cpp: $(BISON_CPP) $(BISON_OBJ_PP) $(BISON_HPP) $(FLEX_CPP) $(FLEX_OBJ_PP) $(OBJ) $(INCLUDES) 
 	$(AR) rcs libtopologic.a $(OBJ) $(BISON_OBJ_PP) $(FLEX_OBJ_PP)
 
-rust: 
+rust: cpp 
 	@bash rustopologic/rustCreation.sh
 
 $(FLEX_CPP):
