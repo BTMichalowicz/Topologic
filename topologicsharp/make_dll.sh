@@ -5,6 +5,9 @@ sleep 1
 cd topologicsharp
 set -x
 
+
+#mcs *.cs topologicsharp_wrap.c -target:library -out:topologicsharp.dll
+
 #mcs SWIGTYPE_p_void.cs -target:library -out:SWIGTYPE_p_void.dll
 #mcs AVLNode.cs -target:library -out:AVLNode.dll
 #mcs stack.cs -target:library -out:stack.dll
@@ -31,17 +34,30 @@ set -x
 #mcs graph.cs -target:library -out:graph.dll
 
 
-
-
-
-for i in * : 
+for i in ../src/* :
 do
-	if [[ "$i" == *.cs ]] 
-	then	
-		echo "filename: $i"
-		j=$(echo $i | sed 's/\.cs//g')
-		#echo $j
-		mcs $i -target:library -out:$j.dll
+	if [[ "$i" == *.c ]] 
+	then
+		gcc -c -fpic $i 
 	fi
 done
+
+gcc -c -fpic topologicsharp_wrap.c
+
+gcc -shared ../src/*.o -o topologicsharp.so
+
+mono-csc -target:library -out:topologicsharp.dll *.cs
+
+
+
+#for i in * : 
+#do
+#	if [[ "$i" == *.cs ]] 
+#	then	
+#		echo "filename: $i"
+#		j=$(echo $i | sed 's/\.cs//g')
+#		#echo $j
+#		mcs $i -target:library -out:$j.dll
+#	fi
+#done
 

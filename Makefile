@@ -74,8 +74,9 @@ python2: $(OBJ) $(INCLUDES)
 	$(CC) -shared topylogic/topylogic_wrap.o $(OBJ) -o $(TOPYLOGIC_SO)
 
 csharp: $(OBJ) $(INCLUDES)
-	swig -outfile topologicsharp.cs -csharp  $(CSHARP_I) 
-	$(CC) -c -fPIC $(CSHARP_WRAP) -o topologicsharp/topologicsharp.o 
+	#swig -outfile topologicsharp.cs -csharp  $(CSHARP_I) 
+	swig -csharp $(CSHARP_I)
+	#$(CC) -c -fPIC $(CSHARP_WRAP) -o topologicsharp/topologicsharp.o 
 	@bash topologicsharp/make_dll.sh
 	
 
@@ -112,7 +113,9 @@ clean:
 	-rm -f topylogic/state_*
 	rm -f topologicsharp/*.dll
 	rm -f $(TESTS) $(TEST_OBJ)
+	rm -f topologicsharp/*.exe
 	-rm -f testing/*.exe
+	rm -f topologicsharp/topologicsharp.so
 	rm -f rustopologic/RustTopologic/src/bindings.rs
 	rm -f rustopologic/RustTopologic/src/*.c
 	rm -f rustopologic/RustTopologic/Cargo.lock
