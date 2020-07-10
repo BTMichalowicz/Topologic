@@ -46,6 +46,8 @@ gcc -c -fpic topologicsharp_wrap.c
 
 gcc -shared ../src/*.o -o topologicsharp.so
 
+#cp tests/test.cs .
+
 mono-csc -target:library -out:topologicsharp.dll *.cs
 
 

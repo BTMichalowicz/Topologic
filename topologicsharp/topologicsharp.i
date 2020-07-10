@@ -3,8 +3,15 @@
 
 %module topologicsharp
 %{
-#include "../include/topologic.h"
 #include "../include/header.h"
+#include "../include/stack.h"
+#include "../include/graph.h"
+#include "../include/vertex.h"
+#include "../include/AVL.h"
+#include "../include/topologic.h"
+#include "../include/context.h"
+#include "../include/edge.h"
+#include "../include/request.h"
 %}
 
 %include "../include/stack.h"
